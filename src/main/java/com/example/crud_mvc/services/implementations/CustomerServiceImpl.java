@@ -5,6 +5,7 @@ import com.example.crud_mvc.repositories.CustomerRepository;
 import com.example.crud_mvc.services.CustomerService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,21 +19,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        List<Customer> customers = new ArrayList<>();
+        customerRepository.findAll().forEach(customers::add);
+        return customers;
     }
 
     @Override
     public Customer findById(Integer integer) {
-        return null;
+        return customerRepository.findById(integer).orElse(null);
     }
 
     @Override
     public Customer save(Customer object) {
-        return null;
+        return customerRepository.save(object);
     }
 
     @Override
     public void deleteById(Integer integer) {
-
+        customerRepository.deleteById(integer);
     }
 }
