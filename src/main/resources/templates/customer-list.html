@@ -22,10 +22,13 @@
                     <td th:text="${customer.firstName}"></td>
                     <td th:text="${customer.lastName}"></td>
                     <td th:text="${customer.email}"></td>
+                    <form th:action="@{/edit/{id} (id = ${customer.id})}" th:object="${customer}" th:method="get">
                     <td><button type="submit" class="update_btn">Update</button></td>
+                    </form>
                     <form th:action="@{deleteCustomer/{id}(id = ${customer.id})}" th:method="post">
                     <td><button type="submit" class="delete_btn">Delete</button></td>
                     </form>
+
                 </tr>
             </table>
         </div>

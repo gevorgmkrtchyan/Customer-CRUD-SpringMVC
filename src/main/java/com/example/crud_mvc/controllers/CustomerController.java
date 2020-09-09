@@ -4,10 +4,7 @@ import com.example.crud_mvc.model.Customer;
 import com.example.crud_mvc.services.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +36,17 @@ public class CustomerController {
     @PostMapping("deleteCustomer/{id}")
     public String deleteCustomer(@PathVariable int id){
         customerService.deleteById(id);
+        return "redirect:/list";
+    }
+    @GetMapping("/edit/{id}")
+    public String updateCustomerForm(@PathVariable("id") int id, Model model){
+        Customer customer = customerService.findById(id);
+        model.addAttribute("customer", customer);
+        return "update-form";
+    }
+    @PostMapping("edit/update/{id}")
+    public String updateCustomer(@PathVariable("id") int id, Customer customer){
+        customerService.save(customer);
         return "redirect:/list";
     }
 }
